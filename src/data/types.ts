@@ -1,3 +1,5 @@
+import type { ImageMetadata } from "astro";
+
 export const LANGS = ["en", "de"] as const;
 export type Lang = (typeof LANGS)[number];
 
@@ -30,6 +32,8 @@ export interface Project {
   decisions: Decision[];
   evaluation: LocalizedList;
   diagram: DiagramKind;
+  /** A real screenshot of the product, shown at the top of the case study. */
+  screenshot?: { src: ImageMetadata; alt: Localized };
 }
 
 export interface Role {

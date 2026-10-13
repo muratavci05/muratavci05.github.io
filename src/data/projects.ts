@@ -1,3 +1,5 @@
+import lingubaseShot from "../assets/lingubase.jpg";
+import petsenseShot from "../assets/petsense.jpg";
 import type { Principle, Project } from "./types";
 
 /**
@@ -81,6 +83,10 @@ export const projects: Project[] = [
       ],
     },
     diagram: "eval-gate",
+    screenshot: {
+      src: lingubaseShot,
+      alt: { en: "LinguBase start page", de: "Startseite von LinguBase" },
+    },
   },
   {
     slug: "berufdeutsch",
@@ -218,6 +224,10 @@ export const projects: Project[] = [
       ],
     },
     diagram: "consent",
+    screenshot: {
+      src: petsenseShot,
+      alt: { en: "PetSense start page with an example photo analysis", de: "Startseite von PetSense mit einer Beispiel-Fotoanalyse" },
+    },
   },
   {
     slug: "industrial-ai",

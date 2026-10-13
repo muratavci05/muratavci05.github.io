@@ -1,0 +1,194 @@
+---
+import { proof } from "../data/proof";
+import type { Lang } from "../data/types";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const s = proof.labels[lang];
+const levels = ["A1", "A2", "B1", "B2", "C1", "C2"] as const;
+---
+
+<figure class="proof" aria-label={s.title}>
+  <div class="top">
+    <span class="product">LinguBase</span>
+    <span class="real">{s.real}</span>
+  </div>
+
+  <p class="sentence" lang="de">
+    {
+      proof.sentence.map((part) =>
+        typeof part === "string" ? (
+          part
+        ) : (
+          <mark>
+            {part.word}
+            <sup>{part.level}</sup>
+          </mark>
+        ),
+      )
+    }
+  </p>
+
+  <div class="result">
+    <div class="level">
+      <span class="k">{s.level}</span>
+      <strong>{proof.level}</strong>
+    </div>
+    <div class="conf">
+      <span class="k">{s.confidence}</span>
+      <strong>{proof.confidence} %</strong>
+    </div>
+    <ol class="scale" aria-label={s.distribution}>
+      {levels.map((l) => <li class:list={{ hit: l === proof.level }}>{l}</li>)}
+    </ol>
+  </div>
+
+  <p class="why"><span class="k">{s.why}</span> {proof.reason[lang]}</p>
+
+  <figcaption>
+    <span>{s.caption}</span>
+    <a href="https://lingubase.netlify.app/" target="_blank" rel="noopener">{s.try} ↗</a>
+  </figcaption>
+</figure>
+
+<style>
+  .proof {
+    margin: 0 0 48px;
+    padding: clamp(16px, 3vw, 22px);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 18px 40px -30px color-mix(in srgb, var(--ink) 45%, transparent);
+    display: grid;
+    gap: 14px;
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .product {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .real {
+    font-family: var(--f-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pass);
+    border: 1px solid color-mix(in srgb, var(--pass) 45%, transparent);
+    border-radius: 999px;
+    padding: 2px 9px;
+  }
+  .sentence {
+    margin: 0;
+    font-size: clamp(1.05rem, 2.6vw, 1.25rem);
+    line-height: 1.55;
+  }
+  mark {
+    background: color-mix(in srgb, var(--signal) 16%, transparent);
+    color: inherit;
+    border-radius: 5px;
+    padding: 0 4px;
+  }
+  sup {
+    font-family: var(--f-mono);
+    font-size: 0.6em;
+    color: var(--signal);
+    margin-left: 2px;
+  }
+  .result {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr);
+    gap: 14px 22px;
+    align-items: end;
+  }
+  @media (max-width: 520px) {
+    .result {
+      grid-template-columns: auto auto;
+    }
+    .scale {
+      grid-column: 1 / -1;
+    }
+  }
+  .k {
+    display: block;
+    font-family: var(--f-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+  .level strong {
+    display: inline-grid;
+    place-items: center;
+    min-width: 56px;
+    height: 44px;
+    padding-inline: 10px;
+    border-radius: 10px;
+    background: var(--accent);
+    color: var(--surface);
+    font-family: var(--f-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+  }
+  .conf strong {
+    font-family: var(--f-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .scale {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 4px;
+  }
+  .scale li {
+    text-align: center;
+    font-family: var(--f-mono);
+    font-size: 0.68rem;
+    padding: 6px 0;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--line) 60%, transparent);
+    color: var(--muted);
+  }
+  .scale li.hit {
+    background: var(--accent);
+    color: var(--surface);
+  }
+  .why {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+  .why .k {
+    display: inline;
+    margin-right: 6px;
+  }
+  figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  figcaption a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+</style>

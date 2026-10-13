@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Diagram from "./Diagram.astro";
 import { casePath, homePath, t, ui } from "../data/i18n";
@@ -37,6 +38,21 @@ const next = projects[(index + 1) % projects.length];
         <a class="visit" href={p.url} target="_blank" rel="noopener">
           {s.visit} ↗
         </a>
+      )
+    }
+
+    {
+      p.screenshot && (
+        <figure class="shot">
+          <Image
+            src={p.screenshot.src}
+            alt={p.screenshot.alt[lang]}
+            widths={[720, 1440]}
+            sizes="(max-width: 820px) 100vw, 724px"
+            format="webp"
+            loading="eager"
+          />
+        </figure>
       )
     }
 
@@ -149,6 +165,19 @@ const next = projects[(index + 1) % projects.length];
     color: var(--accent);
     text-decoration: none;
     border-bottom: 1.5px solid currentColor;
+  }
+  .shot {
+    margin: 28px 0 0;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: 0 24px 50px -34px color-mix(in srgb, var(--ink) 50%, transparent);
+    background: var(--surface);
+  }
+  .shot :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
   }
   .block {
     padding-top: 34px;

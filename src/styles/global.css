@@ -1,6 +1,6 @@
 /* Layout: one calm column, read like a short evaluation report. Name, thesis, four projects with how each is checked, then the record. */
 :root {
-  --backdrop: #e6e9ee;
+  --backdrop: #dde1e8;
   --paper: #f8f9fb;
   --surface: #ffffff;
   --ink: #101726;
@@ -18,7 +18,7 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --backdrop: #06080c;
+    --backdrop: #030406;
     --paper: #0e131b;
     --surface: #151d29;
     --ink: #e8ecf3;
@@ -33,7 +33,7 @@
   }
 }
 :root[data-theme="dark"] {
-  --backdrop: #06080c;
+  --backdrop: #030406;
   --paper: #0e131b;
   --surface: #151d29;
   --ink: #e8ecf3;

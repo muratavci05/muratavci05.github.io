@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import portrait from "../assets/portrait.jpg";
+import ProofCard from "./ProofCard.astro";
 import { ui } from "../data/i18n";
 import { profile } from "../data/profile";
 import type { Lang } from "../data/types";
@@ -61,6 +62,7 @@ const thesis = profile.thesis[lang];
       {profile.email}
     </button>
   </div>
+  <ProofCard lang={lang} />
 </header>
 
 <script>
@@ -152,7 +154,7 @@ const thesis = profile.thesis[lang];
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin: 28px 0 48px;
+    margin: 28px 0 32px;
   }
   .links .pill {
     font-size: 0.92rem;
