@@ -1,0 +1,124 @@
+---
+import { t, ui } from "../data/i18n";
+import { certificates, education, experience, languages, stack } from "../data/record";
+import type { Lang } from "../data/types";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const s = ui[lang];
+---
+
+<section class="section" aria-labelledby="record-title">
+  <h2 class="label" id="record-title">{s.experience}</h2>
+  <ol class="rows">
+    {
+      experience.map((r) => (
+        <li>
+          <span class="when">{r.period[lang]}</span>
+          <span>
+            <strong>{t(r.title, lang)}</strong> <span class="sub">· {r.where[lang]}</span>
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+
+  <h3 class="sub-label">{s.education}</h3>
+  <ol class="rows">
+    {
+      education.map((e) => (
+        <li>
+          <span class="when">{e.period ? t(e.period, lang) : ""}</span>
+          <span>
+            <strong>{e.school}</strong> <span class="sub">· {e.program[lang]}</span>
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+
+  <h3 class="sub-label">{s.certificates}</h3>
+  <ul class="chips">
+    {
+      certificates.map((c) => (
+        <li class:list={["chip", { key: c.featured }]} title={c.credentialId ? `ID ${c.credentialId}` : undefined}>
+          {c.name}
+        </li>
+      ))
+    }
+  </ul>
+
+  <h3 class="sub-label">{s.stack}</h3>
+  <ul class="chips">
+    {stack.map((x) => <li class:list={["chip", { key: x.key }]}>{t(x.name, lang)}</li>)}
+  </ul>
+
+  <h3 class="sub-label">{s.languages}</h3>
+  <ul class="chips">
+    {languages.map((l) => <li class="chip">{l[lang]}</li>)}
+  </ul>
+</section>
+
+<style>
+  .rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .rows li {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 4px 20px;
+    padding-block: 9px;
+  }
+  @media (max-width: 560px) {
+    .rows li {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+    }
+  }
+  .when {
+    font-family: var(--f-mono);
+    font-size: 0.76rem;
+    color: var(--muted);
+    padding-top: 3px;
+    font-variant-numeric: tabular-nums;
+  }
+  strong {
+    font-weight: 600;
+  }
+  .sub {
+    color: var(--muted);
+  }
+  .sub-label {
+    font-family: var(--f-mono);
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 26px 0 8px;
+  }
+  .chips {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+  .chip {
+    font-size: 0.86rem;
+    padding: 5px 11px;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+  .chip.key {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+</style>

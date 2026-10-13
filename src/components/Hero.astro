@@ -1,0 +1,109 @@
+---
+import { ui } from "../data/i18n";
+import { profile } from "../data/profile";
+import type { Lang } from "../data/types";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const thesis = profile.thesis[lang];
+---
+
+<header class="intro">
+  <h1>{profile.name}</h1>
+  <p class="role">{profile.role[lang]}</p>
+  <p class="thesis">{thesis.lead} <span>{thesis.highlight}</span></p>
+  <p class="bio">{profile.bio[lang]}</p>
+  <div class="links">
+    {
+      profile.links.map((link) => (
+        <a class="pill" href={link.url} target="_blank" rel="noopener">
+          {link.label} ↗
+        </a>
+      ))
+    }
+    <button
+      type="button"
+      class="pill mail"
+      id="copy-email"
+      title={ui[lang].copy}
+      data-copied={ui[lang].copied}
+    >
+      {profile.email}
+    </button>
+  </div>
+</header>
+
+<script>
+  const button = document.getElementById("copy-email");
+  if (button) {
+    const address = button.textContent?.trim() ?? "";
+    button.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(address);
+        button.textContent = button.dataset["copied"] ?? address;
+        setTimeout(() => (button.textContent = address), 1500);
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(button);
+        const selection = getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+      }
+    });
+  }
+</script>
+
+<style>
+  h1 {
+    font-family: var(--f-display);
+    font-weight: 800;
+    font-size: clamp(2.6rem, 8vw, 3.9rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    margin: 0;
+  }
+  .role {
+    font-family: var(--f-mono);
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin: 14px 0 0;
+    letter-spacing: 0.02em;
+  }
+  .thesis {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: clamp(1.35rem, 3.4vw, 1.75rem);
+    line-height: 1.28;
+    letter-spacing: -0.015em;
+    margin: 30px 0 0;
+    text-wrap: balance;
+    max-width: 24em;
+  }
+  .thesis span {
+    color: var(--accent);
+  }
+  .bio {
+    color: var(--muted);
+    margin: 16px 0 0;
+    max-width: 36em;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 28px 0 48px;
+  }
+  .links .pill {
+    font-size: 0.92rem;
+    font-weight: 500;
+    padding: 8px 14px;
+    background: var(--surface);
+  }
+  .links .mail {
+    font-family: var(--f-mono);
+    font-size: 0.82rem;
+  }
+</style>

@@ -1,0 +1,106 @@
+/* Layout: one calm column, read like a short evaluation report. Name, thesis, four projects with how each is checked, then the record. */
+:root {
+  --paper: #f4f5f7;
+  --surface: #ffffff;
+  --ink: #101726;
+  --muted: #5b6576;
+  --line: #dce0e7;
+  --accent: #2a43cf;
+  --pass: #1d7a4c;
+  --signal: #a86400;
+  --f-display: "Bricolage Grotesque Variable", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Instrument Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0c1017;
+    --surface: #121924;
+    --ink: #e8ecf3;
+    --muted: #97a2b5;
+    --line: #243042;
+    --accent: #93a4ff;
+    --pass: #52c690;
+    --signal: #efae4a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0c1017;
+  --surface: #121924;
+  --ink: #e8ecf3;
+  --muted: #97a2b5;
+  --line: #243042;
+  --accent: #93a4ff;
+  --pass: #52c690;
+  --signal: #efae4a;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 16.5px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: inherit;
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding-inline: clamp(16px, 5vw, 32px);
+  padding-block: clamp(28px, 6vw, 56px) 40px;
+}
+.section {
+  padding-block: 40px;
+  border-top: 1px solid var(--line);
+}
+.label {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 18px;
+}
+.pill {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+.pill:hover {
+  border-color: var(--ink);
+}
+.pill:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

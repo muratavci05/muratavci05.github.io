@@ -1,0 +1,132 @@
+---
+import { paths, ui } from "../data/i18n";
+import { profile } from "../data/profile";
+import { LANGS, type Lang } from "../data/types";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const s = ui[lang];
+---
+
+<div class="bar">
+  <span class="mark" aria-hidden="true">{profile.initials}</span>
+  <div class="tools">
+    <button
+      type="button"
+      class="pill theme"
+      id="theme-toggle"
+      data-dark={s.themeToDark}
+      data-light={s.themeToLight}
+    >
+      <span class="ic" aria-hidden="true">☾</span><span class="tx">{s.themeToDark}</span>
+    </button>
+    <nav class="lang" aria-label={s.language}>
+      {
+        LANGS.map((l) => (
+          <a href={paths[l]} hreflang={l} aria-current={l === lang ? "page" : undefined}>
+            {l.toUpperCase()}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</div>
+
+<script>
+  const root = document.documentElement;
+  const button = document.getElementById("theme-toggle");
+  const media = matchMedia("(prefers-color-scheme: dark)");
+
+  const isDark = (): boolean => {
+    const set = root.dataset["theme"];
+    return set ? set === "dark" : media.matches;
+  };
+
+  const paint = (): void => {
+    if (!button) return;
+    const dark = isDark();
+    const icon = button.querySelector(".ic");
+    const text = button.querySelector(".tx");
+    const next = dark ? button.dataset["light"] : button.dataset["dark"];
+    if (icon) icon.textContent = dark ? "☀" : "☾";
+    if (text && next) text.textContent = next;
+    button.setAttribute("aria-label", next ?? "");
+  };
+
+  button?.addEventListener("click", () => {
+    const next = isDark() ? "light" : "dark";
+    root.dataset["theme"] = next;
+    try {
+      localStorage.setItem("ma-theme", next);
+    } catch {
+      /* storage may be unavailable; the choice then lasts for this page view */
+    }
+    paint();
+  });
+  media.addEventListener("change", paint);
+  paint();
+</script>
+
+<style>
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: clamp(40px, 8vw, 72px);
+  }
+  .mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: var(--ink);
+    color: var(--paper);
+    display: grid;
+    place-items: center;
+    font-family: var(--f-mono);
+    font-size: 0.74rem;
+    font-weight: 500;
+  }
+  .tools {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .theme {
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    padding: 5px 12px;
+    color: var(--muted);
+  }
+  .theme:hover {
+    color: var(--ink);
+  }
+  .ic {
+    font-size: 0.85rem;
+    line-height: 1;
+  }
+  .lang {
+    display: flex;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 2px;
+  }
+  .lang a {
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    padding: 4px 11px;
+    border-radius: 999px;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .lang a:hover {
+    color: var(--ink);
+  }
+  .lang a[aria-current="page"] {
+    background: var(--ink);
+    color: var(--paper);
+  }
+</style>

@@ -1,0 +1,66 @@
+---
+import { ui } from "../data/i18n";
+import { principles } from "../data/projects";
+import type { Lang } from "../data/types";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<section class="section" aria-labelledby="how-title">
+  <h2 class="label" id="how-title">{ui[lang].how}</h2>
+  <ol class="how">
+    {
+      principles.map((p) => (
+        <li>
+          <strong>{p.title[lang]}</strong>
+          <span>{p.text[lang]}</span>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  .how {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+  }
+  @media (max-width: 620px) {
+    .how {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  li {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 16px 18px;
+    counter-increment: step;
+  }
+  li::before {
+    content: counter(step, decimal-leading-zero);
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 6px;
+  }
+  strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  span {
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+</style>
