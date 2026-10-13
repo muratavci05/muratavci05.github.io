@@ -21,7 +21,7 @@ export const profile = {
     de: "Murat Avci, AI Engineer in Frankfurt. Ich baue KI-Produkte und die Evaluationen, die zeigen, dass sie richtig antworten.",
   } satisfies Localized,
   location: "Frankfurt am Main",
-  email: "js.muratavci@gmail.com",
+  email: "muratavci05@hotmail.com",
   links: [
     { label: "LinkedIn", url: "https://www.linkedin.com/in/muratavci05" },
     { label: "GitHub", url: "https://github.com/muratavci05" },
