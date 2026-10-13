@@ -1,6 +1,6 @@
 ---
-import { ui } from "../data/i18n";
-import { principles } from "../data/projects";
+import { casePath, t, ui } from "../data/i18n";
+import { principles, projects } from "../data/projects";
 import type { Lang } from "../data/types";
 
 interface Props {
@@ -8,16 +8,30 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const s = ui[lang];
+const bySlug = new Map(projects.map((p) => [p.slug, p]));
 ---
 
 <section class="section" aria-labelledby="how-title">
-  <h2 class="label" id="how-title">{ui[lang].how}</h2>
+  <h2 class="label" id="how-title">{s.how}</h2>
   <ol class="how">
     {
       principles.map((p) => (
         <li>
           <strong>{p.title[lang]}</strong>
-          <span>{p.text[lang]}</span>
+          <span class="text">{p.text[lang]}</span>
+          <span class="applied">
+            {s.appliedIn}:{" "}
+            {p.appliedIn.map((slug, i) => {
+              const project = bySlug.get(slug);
+              return project ? (
+                <>
+                  {i > 0 && ", "}
+                  <a href={casePath(slug, lang)}>{t(project.name, lang)}</a>
+                </>
+              ) : null;
+            })}
+          </span>
         </li>
       ))
     }
@@ -27,7 +41,7 @@ const { lang } = Astro.props;
 <style>
   .how {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
     margin: 0;
     padding: 0;
@@ -40,27 +54,38 @@ const { lang } = Astro.props;
     }
   }
   li {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 16px 16px 18px;
+    border-top: 2px solid var(--ink);
+    padding-top: 12px;
     counter-increment: step;
+    display: grid;
+    gap: 4px;
+    align-content: start;
   }
   li::before {
     content: counter(step, decimal-leading-zero);
     font-family: var(--f-mono);
     font-size: 0.7rem;
     color: var(--accent);
-    display: block;
-    margin-bottom: 6px;
   }
   strong {
-    display: block;
     font-weight: 600;
-    margin-bottom: 2px;
+    font-size: 1.05rem;
   }
-  span {
+  .text {
     color: var(--muted);
-    font-size: 0.92rem;
+    font-size: 0.94rem;
+  }
+  .applied {
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .applied a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .applied a:hover {
+    text-decoration: underline;
   }
 </style>

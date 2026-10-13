@@ -1,18 +1,19 @@
 ---
-import { paths, ui } from "../data/i18n";
+import { homePath, ui } from "../data/i18n";
 import { profile } from "../data/profile";
 import { LANGS, type Lang } from "../data/types";
 
 interface Props {
   lang: Lang;
+  alternates: Record<Lang, string>;
 }
 
-const { lang } = Astro.props;
+const { lang, alternates } = Astro.props;
 const s = ui[lang];
 ---
 
 <div class="bar">
-  <span class="mark" aria-hidden="true">{profile.initials}</span>
+  <a class="mark" href={homePath[lang]} aria-label={profile.name}>{profile.initials}</a>
   <div class="tools">
     <button
       type="button"
@@ -26,7 +27,7 @@ const s = ui[lang];
     <nav class="lang" aria-label={s.language}>
       {
         LANGS.map((l) => (
-          <a href={paths[l]} hreflang={l} aria-current={l === lang ? "page" : undefined}>
+          <a href={alternates[l]} hreflang={l} aria-current={l === lang ? "page" : undefined}>
             {l.toUpperCase()}
           </a>
         ))
@@ -89,6 +90,7 @@ const s = ui[lang];
     font-family: var(--f-mono);
     font-size: 0.74rem;
     font-weight: 500;
+    text-decoration: none;
   }
   .tools {
     display: flex;

@@ -1,5 +1,5 @@
 ---
-import { t, ui } from "../data/i18n";
+import { casePath, t, ui } from "../data/i18n";
 import { projects } from "../data/projects";
 import type { Lang } from "../data/types";
 
@@ -11,29 +11,25 @@ const { lang } = Astro.props;
 const s = ui[lang];
 ---
 
-<section class="section" aria-labelledby="work-title">
+<section class="section" id="work" aria-labelledby="work-title">
   <h2 class="label" id="work-title">{s.work}</h2>
   <ol class="work">
     {
       projects.map((p) => (
-        <li class="item">
-          <div class="head">
-            <h3>
-              {p.url ? (
-                <a href={p.url} target="_blank" rel="noopener">
-                  {t(p.name, lang)} ↗
-                </a>
-              ) : (
-                t(p.name, lang)
-              )}
-            </h3>
-            <span class:list={["status", p.status]}>{s.status[p.status]}</span>
-          </div>
-          <p>{p.summary[lang]}</p>
-          <div class="check">
-            <b>{s.check[p.check.label]}</b>
-            <span>{p.check.text[lang]}</span>
-          </div>
+        <li>
+          <a class="card" href={casePath(p.slug, lang)}>
+            <span class="proves">{p.proves[lang]}</span>
+            <span class="head">
+              <h3>{t(p.name, lang)}</h3>
+              <span class:list={["status", p.status]}>{s.status[p.status]}</span>
+            </span>
+            <span class="summary">{p.summary[lang]}</span>
+            <span class="check">
+              <b>{s.check[p.check.label]}</b>
+              <span>{p.check.text[lang]}</span>
+            </span>
+            <span class="more">{s.readCase} →</span>
+          </a>
         </li>
       ))
     }
@@ -45,15 +41,42 @@ const s = ui[lang];
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-  .item {
     display: grid;
-    gap: 6px;
-    padding-block: 20px;
-    border-bottom: 1px solid var(--line);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
   }
-  .item:first-child {
-    padding-top: 0;
+  @media (max-width: 640px) {
+    .work {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  li {
+    display: flex;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    padding: 18px 18px 16px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    text-decoration: none;
+    transition:
+      border-color 0.15s,
+      transform 0.15s;
+  }
+  .card:hover {
+    border-color: var(--ink);
+    transform: translateY(-2px);
+  }
+  .proves {
+    font-family: var(--f-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
   }
   .head {
     display: flex;
@@ -68,22 +91,16 @@ const s = ui[lang];
     letter-spacing: -0.01em;
     margin: 0;
   }
-  h3 a {
-    text-decoration: none;
-    border-bottom: 1.5px solid var(--accent);
-  }
-  h3 a:hover {
-    color: var(--accent);
-  }
   .status {
     font-family: var(--f-mono);
-    font-size: 0.66rem;
+    font-size: 0.62rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     padding: 2px 8px;
     border-radius: 999px;
     border: 1px solid var(--line);
     color: var(--muted);
+    white-space: nowrap;
   }
   .status.live {
     color: var(--pass);
@@ -93,26 +110,31 @@ const s = ui[lang];
     color: var(--signal);
     border-color: color-mix(in srgb, var(--signal) 50%, transparent);
   }
-  p {
-    margin: 0;
-    max-width: 40em;
+  .summary {
+    font-size: 0.95rem;
   }
   .check {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
-    gap: 10px;
+    gap: 8px;
     align-items: baseline;
-    margin-top: 4px;
     color: var(--muted);
-    font-size: 0.94rem;
+    font-size: 0.88rem;
   }
   .check b {
     font-family: var(--f-mono);
-    font-size: 0.68rem;
+    font-size: 0.64rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     font-weight: 500;
     color: var(--pass);
     white-space: nowrap;
+  }
+  .more {
+    margin-top: auto;
+    padding-top: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--accent);
   }
 </style>

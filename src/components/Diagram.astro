@@ -1,0 +1,237 @@
+---
+import type { DiagramKind, Lang } from "../data/types";
+
+interface Props {
+  kind: DiagramKind;
+  lang: Lang;
+}
+
+const { kind, lang } = Astro.props;
+const de = lang === "de";
+const L = (en: string, deText: string): string => (de ? deText : en);
+---
+
+<figure class="diagram" aria-label={L("Architecture diagram", "Architekturdiagramm")}>
+  {
+    kind === "eval-gate" && (
+      <>
+        <p class="lane">{L("At runtime", "Im Betrieb")}</p>
+        <div class="row">
+          <div class="node">{L("German sentence", "Deutscher Satz")}</div>
+          <span class="arr">→</span>
+          <div class="node em">{L("Level engine", "Niveau-Engine")}</div>
+          <span class="arr">→</span>
+          <div class="node">{L("Level A1–C2 + reason", "Niveau A1–C2 + Begründung")}</div>
+        </div>
+        <p class="lane">{L("Before every release", "Vor jedem Release")}</p>
+        <div class="row">
+          <div class="node">{L("Exam texts rated by examiners", "Von Prüfern bewertete Prüfungstexte")}</div>
+          <span class="arr">+</span>
+          <div class="node">{L("Teacher corrections", "Korrekturen der Lehrkräfte")}</div>
+          <span class="arr">→</span>
+          <div class="node em">{L("Evaluation set", "Evaluationsset")}</div>
+        </div>
+        <div class="row">
+          <div class="node">{L("Engine change", "Änderung an der Engine")}</div>
+          <span class="arr">→</span>
+          <div class="node gate">{L("Measured on the set", "Am Set gemessen")}</div>
+          <span class="arr">→</span>
+          <div class="split">
+            <div class="node pass">{L("Better → deploy", "Besser → Deployment")}</div>
+            <div class="node fail">{L("Not better → back to work", "Nicht besser → zurück")}</div>
+          </div>
+        </div>
+      </>
+    )
+  }
+  {
+    kind === "roles" && (
+      <>
+        <div class="col">
+          <div class="node em">{L("Platform administrator", "Plattform-Administration")}</div>
+          <span class="arr down">↓ {L("oversees several institutions", "betreut mehrere Einrichtungen")}</span>
+          <div class="pair">
+            <div class="node">{L("Institution A", "Einrichtung A")}<small>{L("own users", "eigene Nutzer")}</small></div>
+            <div class="node">{L("Institution B", "Einrichtung B")}<small>{L("own users", "eigene Nutzer")}</small></div>
+          </div>
+          <span class="arr down">↓</span>
+          <div class="pair">
+            <div class="node">{L("Teacher", "Lehrkraft")}</div>
+            <div class="node">{L("Training supervisor", "Praxisanleitung")}</div>
+          </div>
+          <span class="arr down">↓</span>
+          <div class="node">{L("Learner", "Lernende")}</div>
+        </div>
+        <p class="lane">{L("Feedback loop", "Feedback-Kreislauf")}</p>
+        <div class="row">
+          <div class="node">{L("Writing task", "Schreibaufgabe")}</div>
+          <span class="arr">→</span>
+          <div class="node em">{L("AI language feedback", "KI-Sprachfeedback")}</div>
+          <span class="arr">→</span>
+          <div class="node gate">{L("Teacher reviews & corrects", "Lehrkraft prüft & korrigiert")}</div>
+        </div>
+      </>
+    )
+  }
+  {
+    kind === "consent" && (
+      <>
+        <div class="row">
+          <div class="node">{L("Pet photo", "Tierfoto")}</div>
+          <span class="arr">→</span>
+          <div class="node em">
+            {L("Analysis in the browser", "Analyse im Browser")}
+            <small>{L("image stays on the device", "Bild bleibt auf dem Gerät")}</small>
+          </div>
+        </div>
+        <div class="row">
+          <div class="node gate">{L("Explicit consent?", "Ausdrückliche Zustimmung?")}</div>
+          <span class="arr">→</span>
+          <div class="split">
+            <div class="node pass">{L("Yes → optional cloud AI", "Ja → optionale Cloud-KI")}</div>
+            <div class="node">{L("No → stays on the device", "Nein → bleibt auf dem Gerät")}</div>
+          </div>
+        </div>
+      </>
+    )
+  }
+  {
+    kind === "grounding" && (
+      <>
+        <p class="lane">{L("On site, inside the company", "Vor Ort, im Unternehmen")}</p>
+        <div class="trio">
+          <div class="node">{L("Recorded faults", "Dokumentierte Störungen")}</div>
+          <div class="node">{L("Documented solutions", "Bewährte Lösungen")}</div>
+          <div class="node">{L("Technical manuals", "Technische Handbücher")}</div>
+        </div>
+        <span class="arr down">↓</span>
+        <div class="row">
+          <div class="node">{L("Technician's question", "Frage des Technikers")}</div>
+          <span class="arr">→</span>
+          <div class="node em">{L("Local AI application", "Lokale KI-Anwendung")}</div>
+          <span class="arr">→</span>
+          <div class="node">{L("Answer with sources", "Antwort mit Quellen")}</div>
+        </div>
+        <div class="checks">
+          <span>✓ {L("answer quality", "Antwortqualität")}</span>
+          <span>✓ {L("source grounding", "Quellenbezug")}</span>
+          <span>✓ {L("safety", "Sicherheit")}</span>
+        </div>
+      </>
+    )
+  }
+</figure>
+
+<style>
+  .diagram {
+    margin: 0;
+    padding: clamp(16px, 3vw, 24px);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    display: grid;
+    gap: 12px;
+    overflow-x: auto;
+  }
+  .lane {
+    margin: 6px 0 -2px;
+    font-family: var(--f-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .lane:first-child {
+    margin-top: 0;
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .col {
+    display: grid;
+    gap: 6px;
+    justify-items: start;
+  }
+  .pair,
+  .split {
+    display: grid;
+    gap: 6px;
+  }
+  .pair {
+    grid-template-columns: repeat(2, minmax(0, max-content));
+  }
+  .trio {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+  @media (max-width: 520px) {
+    .trio,
+    .pair {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .row .arr {
+      transform: rotate(90deg);
+      align-self: center;
+    }
+  }
+  .node {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 8px 12px;
+    font-size: 0.88rem;
+    line-height: 1.35;
+    min-width: 0;
+  }
+  .node small {
+    display: block;
+    font-family: var(--f-mono);
+    font-size: 0.68rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .node.em {
+    border-color: var(--accent);
+    box-shadow: inset 3px 0 0 var(--accent);
+  }
+  .node.gate {
+    border-style: dashed;
+    border-color: var(--signal);
+  }
+  .node.pass {
+    border-color: color-mix(in srgb, var(--pass) 55%, transparent);
+    color: var(--pass);
+  }
+  .node.fail {
+    color: var(--muted);
+  }
+  .arr {
+    font-family: var(--f-mono);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .arr.down {
+    font-size: 0.72rem;
+  }
+  .checks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .checks span {
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    padding: 4px 9px;
+    border-radius: 6px;
+    color: var(--pass);
+    background: color-mix(in srgb, var(--pass) 12%, transparent);
+  }
+</style>

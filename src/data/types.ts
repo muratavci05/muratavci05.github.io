@@ -3,16 +3,33 @@ export type Lang = (typeof LANGS)[number];
 
 /** A string available in every supported language. */
 export type Localized = Record<Lang, string>;
+/** A list of strings available in every supported language. */
+export type LocalizedList = Record<Lang, string[]>;
 
 export type ProjectStatus = "live" | "development" | "private";
+export type DiagramKind = "eval-gate" | "roles" | "consent" | "grounding";
+
+export interface Decision {
+  title: Localized;
+  text: Localized;
+}
 
 export interface Project {
+  slug: string;
   name: Localized | string;
   url?: string;
   status: ProjectStatus;
+  /** One line for the home page. */
   summary: Localized;
   /** How the project is checked: the line that matters most. */
   check: { label: "evaluated" | "privacy"; text: Localized };
+  /** The capability this project proves, shown as a tag. */
+  proves: Localized;
+  problem: Localized;
+  built: LocalizedList;
+  decisions: Decision[];
+  evaluation: LocalizedList;
+  diagram: DiagramKind;
 }
 
 export interface Role {
@@ -38,4 +55,6 @@ export interface Certificate {
 export interface Principle {
   title: Localized;
   text: Localized;
+  /** Slugs of the projects where this principle is applied. */
+  appliedIn: string[];
 }

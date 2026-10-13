@@ -1,10 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Header from "./Header.astro";
 import Hero from "./Hero.astro";
 import Principles from "./Principles.astro";
 import Record from "./Record.astro";
 import Work from "./Work.astro";
+import { homePath } from "../data/i18n";
 import { profile } from "../data/profile";
 import type { Lang } from "../data/types";
 
@@ -15,28 +15,14 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<Layout lang={lang} title={`${profile.name} · AI Engineer`} description={profile.description[lang]}>
-  <Header lang={lang} />
+<Layout
+  lang={lang}
+  title={`${profile.name} · AI Engineer`}
+  description={profile.description[lang]}
+  alternates={homePath}
+>
   <Hero lang={lang} />
   <Work lang={lang} />
   <Principles lang={lang} />
   <Record lang={lang} />
-  <footer>
-    <span>© {new Date().getFullYear()} {profile.name}</span>
-    <span>{profile.location}</span>
-  </footer>
 </Layout>
-
-<style>
-  footer {
-    border-top: 1px solid var(--line);
-    padding-top: 22px;
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    flex-wrap: wrap;
-    font-family: var(--f-mono);
-    font-size: 0.74rem;
-    color: var(--muted);
-  }
-</style>
