@@ -41,7 +41,12 @@ const canonical = new URL(alternates[lang], site).href;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={lang === "de" ? "de_DE" : "en_US"} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={new URL("/og.png", site).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Murat Avci, AI Engineer. A real LinguBase result: B1, 87 % confidence." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={new URL("/og.png", site).href} />
     <script is:inline>
       try {
         const saved = localStorage.getItem("ma-theme");
