@@ -8,6 +8,8 @@
   --accent: #2a43cf;
   --pass: #1d7a4c;
   --signal: #a86400;
+  --frame-a: #ffffff;
+  --frame-b: #c3c9d3;
   --f-display: "Bricolage Grotesque Variable", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --f-body: "Instrument Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
   --f-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
@@ -23,6 +25,8 @@
     --accent: #93a4ff;
     --pass: #52c690;
     --signal: #efae4a;
+    --frame-a: #3a4558;
+    --frame-b: #141b26;
     color-scheme: dark;
   }
 }
@@ -35,6 +39,8 @@
   --accent: #93a4ff;
   --pass: #52c690;
   --signal: #efae4a;
+  --frame-a: #3a4558;
+  --frame-b: #141b26;
   color-scheme: dark;
 }
 

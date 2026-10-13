@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import portrait from "../assets/portrait.jpg";
 import { ui } from "../data/i18n";
 import { profile } from "../data/profile";
 import type { Lang } from "../data/types";
@@ -12,8 +14,33 @@ const thesis = profile.thesis[lang];
 ---
 
 <header class="intro">
-  <h1>{profile.name}</h1>
-  <p class="role">{profile.role[lang]}</p>
+  <div class="who">
+    <div class="frame">
+      <Image
+        class="portrait"
+        src={portrait}
+        alt={profile.name}
+        width={192}
+        height={192}
+        densities={[1, 2]}
+        format="webp"
+        loading="eager"
+      />
+    </div>
+    <div>
+      <h1>{profile.name}</h1>
+      <p class="role">
+        {
+          profile.role[lang].split(" · ").map((part, i) => (
+            <>
+              {i > 0 && <span class="sep"> · </span>}
+              <span class="part">{part}</span>
+            </>
+          ))
+        }
+      </p>
+    </div>
+  </div>
   <p class="thesis">{thesis.lead} <span>{thesis.highlight}</span></p>
   <p class="bio">{profile.bio[lang]}</p>
   <div class="links">
@@ -57,6 +84,37 @@ const thesis = profile.thesis[lang];
 </script>
 
 <style>
+  .who {
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 3.5vw, 26px);
+  }
+  .who > div {
+    min-width: 0;
+  }
+  /* Rounded square with a soft white-to-grey layer behind the photo. */
+  .frame {
+    flex: none;
+    width: clamp(84px, 18vw, 112px);
+    aspect-ratio: 1;
+    padding: 5px;
+    border-radius: 24px;
+    background: linear-gradient(145deg, var(--frame-a) 0%, var(--frame-b) 100%);
+    box-shadow:
+      0 1px 0 0 color-mix(in srgb, var(--frame-a) 70%, transparent) inset,
+      0 14px 28px -18px color-mix(in srgb, var(--ink) 55%, transparent);
+  }
+  .frame :global(.portrait) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 19px;
+    object-fit: cover;
+    background: var(--line);
+  }
+  .part {
+    white-space: nowrap;
+  }
   h1 {
     font-family: var(--f-display);
     font-weight: 800;
