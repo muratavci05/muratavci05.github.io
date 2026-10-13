@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Murat Avci, AI Engineer in Frankfurt. I build AI products and the evaluations that prove they give the right answer.">
+<meta name="author" content="Murat Avci">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Murat Avci · AI Engineer">
+<meta property="og:description" content="Murat Avci, AI Engineer in Frankfurt. I build AI products and the evaluations that prove they give the right answer.">
+<meta property="og:url" content="https://muratavci05.github.io/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href="https://muratavci05.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23101726'/%3E%3Ctext x='32' y='41' font-family='Menlo,monospace' font-size='24' font-weight='600' fill='%23F4F5F7' text-anchor='middle'%3EMA%3C/text%3E%3C/svg%3E">
+<title>Murat Avci · AI Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one calm column, read like a short evaluation report. Name, thesis, four projects with how each is checked, then the record. */
+:root{
+  --paper:#F4F5F7; --surface:#FFFFFF; --ink:#101726; --muted:#5B6576; --line:#DCE0E7;
+  --accent:#2A43CF; --pass:#1D7A4C; --signal:#A86400;
+  --f-display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --f-body:"Instrument Sans","Helvetica Neue",Arial,system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0C1017; --surface:#121924; --ink:#E8ECF3; --muted:#97A2B5; --line:#243042;
+  --accent:#93A4FF; --pass:#52C690; --signal:#EFAE4A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0C1017; --surface:#121924; --ink:#E8ECF3; --muted:#97A2B5; --line:#243042;
+  --accent:#93A4FF; --pass:#52C690; --signal:#EFAE4A; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16.5px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.page{max-width:760px;margin:0 auto;padding-inline:clamp(16px,5vw,32px);padding-block:clamp(28px,6vw,56px) 40px}
+.label{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin:0 0 18px}
+section{padding-block:40px;border-top:1px solid var(--line)}
+
+/* top */
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:clamp(40px,8vw,72px)}
+.mark{width:34px;height:34px;border-radius:9px;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:var(--f-mono);font-size:.74rem;font-weight:500}
+.tools{display:flex;align-items:center;gap:8px}
+.theme{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:.72rem;padding:5px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.theme:hover{color:var(--ink);border-color:var(--ink)}
+.theme:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.theme .ic{font-size:.85rem;line-height:1}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:2px}
+.lang button{all:unset;cursor:pointer;font-family:var(--f-mono);font-size:.72rem;padding:4px 11px;border-radius:999px;color:var(--muted)}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.lang button:focus-visible{outline:2px solid var(--accent)}
+
+.intro h1{font-family:var(--f-display);font-weight:800;font-size:clamp(2.6rem,8vw,3.9rem);line-height:1;letter-spacing:-.035em;margin:0}
+.role{font-family:var(--f-mono);font-size:.82rem;color:var(--muted);margin:14px 0 0;letter-spacing:.02em}
+.thesis{font-family:var(--f-display);font-weight:600;font-size:clamp(1.35rem,3.4vw,1.75rem);line-height:1.28;letter-spacing:-.015em;margin:30px 0 0;text-wrap:balance;max-width:24em}
+.thesis span{color:var(--accent)}
+.bio{color:var(--muted);margin:16px 0 0;max-width:36em}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 48px}
+.links a,.links button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-size:.92rem;font-weight:500;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.links a:hover,.links button:hover{border-color:var(--ink)}
+.links a:focus-visible,.links button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.links .mail{font-family:var(--f-mono);font-size:.82rem}
+
+/* work */
+.work{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.item{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;padding-block:20px;border-bottom:1px solid var(--line)}
+.item:first-child{padding-top:0}
+.head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.item h3{font-family:var(--f-display);font-weight:600;font-size:1.3rem;letter-spacing:-.01em;margin:0}
+.item h3 a{text-decoration:none;border-bottom:1.5px solid var(--accent)}
+.item h3 a:hover{color:var(--accent)}
+.st{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.st.live{color:var(--pass);border-color:color-mix(in srgb,var(--pass) 45%,transparent)}
+.st.priv{color:var(--signal);border-color:color-mix(in srgb,var(--signal) 50%,transparent)}
+.item p{margin:0;max-width:40em}
+.check{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:baseline;margin-top:4px;color:var(--muted);font-size:.94rem}
+.check b{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500;color:var(--pass);white-space:nowrap}
+
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0;padding:0;list-style:none;counter-reset:h}
+@media (max-width:620px){.how{grid-template-columns:minmax(0,1fr)}}
+.how li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 16px 18px;counter-increment:h}
+.how li::before{content:counter(h,decimal-leading-zero);font-family:var(--f-mono);font-size:.7rem;color:var(--accent);display:block;margin-bottom:6px}
+.how strong{display:block;font-weight:600;margin-bottom:2px}
+.how span{color:var(--muted);font-size:.92rem}
+
+/* record */
+.rows{list-style:none;margin:0;padding:0}
+.rows li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:4px 20px;padding-block:9px}
+@media (max-width:560px){.rows li{grid-template-columns:minmax(0,1fr);gap:0}}
+.when{font-family:var(--f-mono);font-size:.76rem;color:var(--muted);padding-top:3px;font-variant-numeric:tabular-nums}
+.rows strong{font-weight:600}
+.rows .sub{color:var(--muted)}
+.sub-label{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:26px 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:.86rem;padding:5px 11px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+.chip.k{border-color:var(--accent);color:var(--accent)}
+
+footer{border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-family:var(--f-mono);font-size:.74rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+</head>
+<body>
+<div class="page">
+  <div class="bar">
+    <span class="mark" aria-hidden="true">MA</span>
+    <div class="tools">
+    <button type="button" class="theme" id="theme" aria-label="Switch to dark mode"><span class="ic" aria-hidden="true">☾</span><span id="theme-t">Dark</span></button>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" id="lang-en" aria-pressed="true">EN</button>
+      <button type="button" id="lang-de" aria-pressed="false">DE</button>
+    </div>
+    </div>
+  </div>
+
+  <header class="intro">
+    <h1>Murat Avci</h1>
+    <p class="role" data-i18n="role">AI Engineer · Evaluation-first · Frankfurt am Main</p>
+    <p class="thesis" data-i18n-html="thesis">I build AI products and the evaluations that prove <span>they give the right answer.</span></p>
+    <p class="bio" data-i18n="bio">Every change I make is measured against real, expert-rated data before it ships. My work focuses on language analysis, grounded answers and AI that keeps data where it belongs.</p>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/muratavci05" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/muratavci05" target="_blank" rel="noopener">GitHub ↗</a>
+      <button type="button" class="mail" id="copy" title="Copy email">js.muratavci@gmail.com</button>
+    </div>
+  </header>
+
+  <section aria-labelledby="w">
+    <h2 class="label" id="w" data-i18n="w">Selected work</h2>
+    <ol class="work">
+      <li class="item">
+        <div class="head"><h3><a href="https://lingubase.netlify.app/" target="_blank" rel="noopener">LinguBase ↗</a></h3><span class="st live" data-i18n="live">Live</span></div>
+        <p data-i18n="p1">Estimates the CEFR level (A1–C2) of any German sentence in about a second and explains why. Free, no account.</p>
+        <div class="check"><b data-i18n="ev">Evaluated</b><span data-i18n="p1e">On real exam texts rated by professional examiners. Every engine change is measured on the evaluation set before deployment. Teachers correct levels and confirm the set.</span></div>
+      </li>
+      <li class="item">
+        <div class="head"><h3>BerufDeutsch</h3><span class="st" data-i18n="dev">In development</span></div>
+        <p data-i18n="p2">A platform for professional German, starting with nursing education. Separate workspaces for learners, teachers, training supervisors, institutions and a platform admin.</p>
+        <div class="check"><b data-i18n="ev">Evaluated</b><span data-i18n="p2e">AI language feedback stays reviewable: teachers see each assessment and correct it.</span></div>
+      </li>
+      <li class="item">
+        <div class="head"><h3>PetSense</h3><span class="st" data-i18n="dev">In development</span></div>
+        <p data-i18n="p3">A pet care app for profiles, routines and records. Basic photo analysis runs in the browser, so images stay on the device.</p>
+        <div class="check"><b data-i18n="pv">Privacy</b><span data-i18n="p3e">Cloud AI features are optional and run only after explicit consent.</span></div>
+      </li>
+      <li class="item">
+        <div class="head"><h3 data-i18n="p4h">Industrial maintenance AI</h3><span class="st priv" data-i18n="priv">Private · runs locally</span></div>
+        <p data-i18n="p4">Keeps the know-how of experienced technicians: recorded faults, documented solutions and technical manuals in one local system.</p>
+        <div class="check"><b data-i18n="ev">Evaluated</b><span data-i18n="p4e">Answer quality, source grounding and safety. Client details are confidential.</span></div>
+      </li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="h">
+    <h2 class="label" id="h" data-i18n="h">How I work</h2>
+    <ol class="how">
+      <li><strong data-i18n="h1">Define “correct”</strong><span data-i18n="h1p">With the experts: examiners, teachers, technicians.</span></li>
+      <li><strong data-i18n="h2">Test on real cases</strong><span data-i18n="h2p">Rated exam texts, real faults, real manuals.</span></li>
+      <li><strong data-i18n="h3">Ship what beats the baseline</strong><span data-i18n="h3p">No change goes live without being measured.</span></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="x">
+    <h2 class="label" id="x" data-i18n="x">Experience</h2>
+    <ol class="rows">
+      <li><span class="when" data-i18n="d1">Nov 2025 – today</span><span><strong>AI Engineer</strong> <span class="sub" data-i18n="x1">· Freelance, Frankfurt</span></span></li>
+      <li><span class="when" data-i18n="d2">May 2023 – Oct 2025</span><span><strong>Frontend Developer</strong> <span class="sub" data-i18n="x2">· Freelance</span></span></li>
+      <li><span class="when" data-i18n="d3">Sep 2022 – May 2023</span><span><strong>Frontend Developer</strong> <span class="sub" data-i18n="x3">· Mimcode, remote</span></span></li>
+      <li><span class="when" data-i18n="d4">Jan 2021 – Sep 2022</span><span><strong>Frontend Developer</strong> <span class="sub" data-i18n="x4">· Arabuleu, remote</span></span></li>
+      <li><span class="when" data-i18n="d5">May 2016 – Dec 2020</span><span><strong data-i18n="x5h">Digital Marketing & Online Sales</strong> <span class="sub" data-i18n="x5">· Freelance, Ankara</span></span></li>
+    </ol>
+
+    <h3 class="sub-label" data-i18n="ed">Education</h3>
+    <ol class="rows">
+      <li><span class="when" data-i18n="d6">Jun 2022 – Mar 2023</span><span><strong>Fatih Sultan Mehmet Vakıf University</strong> <span class="sub" data-i18n="e1">· Software Expert program</span></span></li>
+      <li><span class="when">M.Sc.</span><span><strong>Türk Hava Kurumu University</strong> <span class="sub" data-i18n="e2">· Business Administration</span></span></li>
+      <li><span class="when"></span><span><strong>Anadolu University</strong> <span class="sub" data-i18n="e3">· Business Administration</span></span></li>
+      <li><span class="when"></span><span><strong>Gaziosmanpaşa University</strong> <span class="sub" data-i18n="e4">· Computer Science</span></span></li>
+    </ol>
+
+    <h3 class="sub-label" data-i18n="ce">Certifications · Anthropic, Mar 2026</h3>
+    <div class="chips">
+      <span class="chip k">Model Context Protocol</span><span class="chip k">MCP: Advanced Topics</span><span class="chip k">Agent Skills</span><span class="chip">Claude Code in Action</span><span class="chip">Building with the Claude API</span><span class="chip">AI Fluency</span><span class="chip">Claude 101</span>
+    </div>
+
+    <h3 class="sub-label" data-i18n="st">Stack</h3>
+    <div class="chips">
+      <span class="chip k">Python</span><span class="chip k">TypeScript</span><span class="chip" data-i18n="s1">Model evaluation</span><span class="chip">NLP</span><span class="chip">RAG</span><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">PostgreSQL / Supabase</span><span class="chip">Firebase</span><span class="chip">Google Cloud</span><span class="chip">Docker</span>
+    </div>
+
+    <h3 class="sub-label" data-i18n="lg">Languages</h3>
+    <div class="chips"><span class="chip" data-i18n="l1">Turkish · native</span><span class="chip" data-i18n="l2">German</span><span class="chip" data-i18n="l3">English · technical reading</span></div>
+  </section>
+
+  <footer><span>© 2026 Murat Avci</span><span>Frankfurt am Main</span></footer>
+</div>
+
+<script>
+(function(){
+  var DE={
+    "role":"AI Engineer · Evaluation-first · Frankfurt am Main",
+    "thesis":"Ich baue KI-Produkte und die Evaluationen, die zeigen, <span>dass sie richtig antworten.</span>",
+    "bio":"Jede Änderung wird an echten, von Fachleuten bewerteten Daten gemessen, bevor sie live geht. Mein Fokus: Sprachanalyse, belegte Antworten und KI, die Daten dort lässt, wo sie hingehören.",
+    "w":"Ausgewählte Projekte","live":"Live","dev":"In Entwicklung","priv":"Privat · läuft lokal","ev":"Evaluiert","pv":"Datenschutz",
+    "p1":"Bestimmt das GER-Niveau (A1–C2) eines deutschen Satzes in etwa einer Sekunde und begründet es. Kostenlos, ohne Anmeldung.",
+    "p1e":"An echten Prüfungstexten, bewertet von professionellen Prüfern. Jede Änderung an der Engine wird vor dem Deployment am Evaluationsset gemessen. Lehrkräfte korrigieren Niveaus und bestätigen das Set.",
+    "p2":"Eine Plattform für Berufsdeutsch, zuerst für die Pflegeausbildung. Eigene Bereiche für Lernende, Lehrkräfte, Praxisanleitende, Einrichtungen und eine Plattform-Administration.",
+    "p2e":"KI-Sprachfeedback bleibt überprüfbar: Lehrkräfte sehen jede Bewertung und korrigieren sie.",
+    "p3":"Eine App für Tierprofile, Routinen und Unterlagen. Eine einfache Fotoanalyse läuft im Browser, die Bilder bleiben auf dem Gerät.",
+    "p3e":"Cloud-KI-Funktionen sind optional und laufen nur nach ausdrücklicher Zustimmung.",
+    "p4h":"KI für die Instandhaltung",
+    "p4":"Bewahrt das Wissen erfahrener Techniker: dokumentierte Störungen, bewährte Lösungen und technische Handbücher in einem lokalen System.",
+    "p4e":"Antwortqualität, Quellenbezug und Sicherheit. Kundendetails sind vertraulich.",
+    "h":"Arbeitsweise","h1":"„Richtig“ definieren","h1p":"Mit den Fachleuten: Prüfer, Lehrkräfte, Techniker.","h2":"An echten Fällen testen","h2p":"Bewertete Prüfungstexte, echte Störungen, echte Handbücher.","h3":"Nur Besseres geht live","h3p":"Keine Änderung ohne Messung gegen die Baseline.",
+    "x":"Erfahrung","d1":"Nov. 2025 – heute","d2":"Mai 2023 – Okt. 2025","d3":"Sept. 2022 – Mai 2023","d4":"Jan. 2021 – Sept. 2022","d5":"Mai 2016 – Dez. 2020","d6":"Juni 2022 – März 2023",
+    "x1":"· Freiberuflich, Frankfurt","x2":"· Freiberuflich","x3":"· Mimcode, remote","x4":"· Arabuleu, remote","x5h":"Digitales Marketing & Online-Vertrieb","x5":"· Freiberuflich, Ankara",
+    "ed":"Ausbildung","e1":"· Programm Softwareexperte","e2":"· Betriebswirtschaftslehre","e3":"· Betriebswirtschaftslehre","e4":"· Informatik",
+    "ce":"Zertifikate · Anthropic, März 2026","st":"Technologien","s1":"Modell-Evaluation","lg":"Sprachen","l1":"Türkisch · Muttersprache","l2":"Deutsch","l3":"Englisch · Fachtexte lesen"
+  };
+  var EN={};
+  document.querySelectorAll("[data-i18n]").forEach(function(el){EN[el.dataset.i18n]=el.textContent});
+  document.querySelectorAll("[data-i18n-html]").forEach(function(el){EN[el.dataset.i18nHtml]=el.innerHTML});
+  function setLang(l){
+    var d=l==="de"?DE:EN;document.documentElement.lang=l;
+    document.querySelectorAll("[data-i18n]").forEach(function(el){var k=el.dataset.i18n;if(d[k]!=null)el.textContent=d[k]});
+    document.querySelectorAll("[data-i18n-html]").forEach(function(el){var k=el.dataset.i18nHtml;if(d[k]!=null)el.innerHTML=d[k]});
+    document.getElementById("lang-en").setAttribute("aria-pressed",l==="en");
+    document.getElementById("lang-de").setAttribute("aria-pressed",l==="de");
+    try{localStorage.setItem("ma-lang",l)}catch(e){}
+    if(window.__pt)window.__pt();
+  }
+
+  var root=document.documentElement,tb=document.getElementById("theme");
+  function isDark(){var t=root.getAttribute("data-theme");return t?t==="dark":matchMedia("(prefers-color-scheme: dark)").matches}
+  function paintTheme(){
+    var de=root.lang==="de",dark=isDark();
+    tb.querySelector(".ic").textContent=dark?"☀":"☾";
+    document.getElementById("theme-t").textContent=dark?(de?"Hell":"Light"):(de?"Dunkel":"Dark");
+    tb.setAttribute("aria-label",dark?(de?"Helles Design":"Switch to light mode"):(de?"Dunkles Design":"Switch to dark mode"));
+  }
+  tb.onclick=function(){var next=isDark()?"light":"dark";root.setAttribute("data-theme",next);try{localStorage.setItem("ma-theme",next)}catch(e){}paintTheme()};
+  try{var st=localStorage.getItem("ma-theme");if(st==="dark"||st==="light")root.setAttribute("data-theme",st)}catch(e){}
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change",paintTheme);
+  paintTheme();window.__pt=paintTheme;
+  document.getElementById("lang-en").onclick=function(){setLang("en")};
+  document.getElementById("lang-de").onclick=function(){setLang("de")};
+  try{if(localStorage.getItem("ma-lang")==="de")setLang("de")}catch(e){}
+  var b=document.getElementById("copy"),addr=b.textContent;
+  b.onclick=function(){
+    function done(){b.textContent=document.documentElement.lang==="de"?"Kopiert ✓":"Copied ✓";setTimeout(function(){b.textContent=addr},1500)}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(addr).then(done,function(){})}
+  };
+})();
+</script>
+</body>
+</html>
