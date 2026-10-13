@@ -161,6 +161,7 @@ export const projects: Project[] = [
   {
     slug: "petsense",
     name: "PetSense",
+    url: "https://petsense-dashboard.netlify.app/",
     status: "development",
     proves: { en: "Privacy by design", de: "Datenschutz by Design" },
     summary: {
